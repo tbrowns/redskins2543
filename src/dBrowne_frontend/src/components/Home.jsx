@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { BsEmojiSmile } from "react-icons/bs";
-import { collection, query, getDocs, doc, updateDoc } from "firebase/firestore";
+import { collection, query,getDoc, getDocs, doc, updateDoc } from "firebase/firestore";
 import { db, auth } from '../firebase';
-import './home.scss';
+import './home.css';
 
 import { getUserCredentials} from '../Utils/LocalStorage';
 
@@ -53,13 +53,32 @@ function Home() {
       const postIndex = posts.findIndex(post => post.id === postId);
       const post = posts[postIndex];
 
+      const docRef = doc(db, "users", `${post.uid}`);
+      const docSnap = await getDoc(docRef);
+      let totalLikes 
+
+      if (docSnap.exists()){
+        totalLikes = docSnap.data().total_likes;
+      }
+
+
       if (post.likes.has(currentUserId)) {
         // User has already liked the post, remove like
         post.likes.delete(currentUserId);
+        totalLikes--;
+
       } else {
         // User has not liked the post, add like
         post.likes.add(currentUserId);
+        totalLikes++;
       }
+
+      const likeRef = doc(db, "users", `${post.uid}`);
+      await updateDoc(likeRef, {
+        total_likes:  totalLikes,
+      
+      });
+
 
       const updatedPost = { ...post, like_count: post.likes.size };
 

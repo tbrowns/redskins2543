@@ -1,0 +1,52 @@
+.profile{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.profile-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.profile-header button{
+    background-color: transparent;
+    color: black;
+    border: 1px solid #222;
+    border-radius: 8px;
+    font-size: 18px;
+    padding: 4px 10px;
+    cursor: pointer;
+}
+
+.profile-header button:hover{
+    background-color: black;
+    color: white;
+}
+
+.profile-info{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 2px;
+    border: 1px solid grey;
+    border-radius: 8px;
+    padding: 4px 10px;
+    width: 120px;
+}
+
+.profile-info p:first-child{
+    font-size: 14px;
+    color: grey;
+
+}
+
+.tokens{
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+}

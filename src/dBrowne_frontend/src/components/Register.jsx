@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { db, auth } from '../firebase';
 import { doc, setDoc } from "firebase/firestore"; 
 
-import './login.scss'
+import './login.css'
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -20,7 +20,8 @@ function Register() {
         async function addUser() {
           await setDoc(doc(db, "users", `${user.uid}` ), {
             username,
-            tokens: 0
+            tokens: 0,
+            total_likes: 0,
           });
 
           console.log("Document written with ID: ", user.uid);

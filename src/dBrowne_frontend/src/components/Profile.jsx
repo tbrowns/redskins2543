@@ -6,26 +6,22 @@ import { signOut } from "firebase/auth";
 
 import { getUserCredentials, removeUserCredentials } from '../Utils/LocalStorage';
 
-import './profile.scss'
-import './home.scss'
+import './profile.css'
+import './home.css'
 
 
 function Profile() {
     const userCredentials = getUserCredentials();
     const [postIds, setPostIds] = useState(new Set());
     const [posts, setPosts] = useState([]);
-    const [tokens, setTokens] = useState(userCredentials.tokens);
+    const [totalLikes, setTotalLikes] = useState(userCredentials.total_likes);
     const [userName, setUserName] = useState(userCredentials.username);
 
     const handleSignOut = () => {
-      signOut(auth)
-        .then(() => {
-          removeUserCredentials();
-          window.location.href = '/';
-          
-        })
-        .catch((error) => {});
+      removeUserCredentials();
+      window.location.href = '/';
     };
+    
     useEffect(() => {
       const getPosts = async () => {
         const q = query(collection(db, "posts"), where("username", "==", userName));
@@ -46,8 +42,11 @@ function Profile() {
   
     return (
       <div className="profile">
-        <div>
-          <p>Tokens{tokens}</p>
+        <div className='profile-header'>
+          <div className="profile-info">
+            <p>Tokens</p> 
+            <p className='tokens'>{(totalLikes*0.01).toFixed(2)}</p>
+          </div>
           <button className='signout' onClick={handleSignOut}>Sign Out</button>
         </div>
         <div className="post-container">

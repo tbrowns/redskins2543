@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { RxAvatar } from "react-icons/rx";
 
-import './header.scss'
+import './header.css'
 import { getUserCredentials } from '../Utils/LocalStorage';
 
 function Header() {
@@ -21,7 +21,8 @@ function Header() {
         setIsSignedIn(userSignedIn);
         if (userSignedIn) {
             const userData = getUserCredentials();
-            setUsername(userData.username);
+            if (userData)
+                setUsername(userData.username);
         }
     }, [location]);
 
@@ -38,9 +39,9 @@ function Header() {
             </div>
             <div className='profile'>
                 {isSignedIn ?
-                    <Link to='/Profile'>
+                    <Link to='/Profile' className='profile_link' >
                         <div className='image_container'>
-                            <RxAvatar />
+                            <div><RxAvatar /></div>
                             <div>{username}</div>
                         </div>
                     </Link> :

@@ -6,7 +6,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 import {motion} from 'framer-motion'
 
-import './post.scss'
+import './post.css'
 import {getUserCredentials} from '../Utils/LocalStorage'
 
 function Post() {

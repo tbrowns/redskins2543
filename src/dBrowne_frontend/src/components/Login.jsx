@@ -1,21 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db, auth } from '../firebase';
 
-import './login.scss'
+import './login.css'
 import { setUserCredentials } from '../Utils/LocalStorage';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  useEffect(() => {
+    console.log(email, password);
+  }, [email, password]);
+
   function handleLogin() {
+    
+
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+
+    
 
         const docRef = doc(db, "users", `${user.uid}`);
 
@@ -37,6 +45,8 @@ function Login() {
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
+
+        console.log(errorCode, errorMessage);
       });
     
   }
