@@ -1,0 +1,26 @@
+{
+  "canisters": {
+    "dBrowne_backend": {
+      "main": "src/dBrowne_backend/main.mo",
+      "type": "motoko"
+    },
+    "dBrowne_frontend": {
+      "dependencies": [
+        "dBrowne_backend"
+      ],
+      "source": [
+        "src/dBrowne_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "dBrowne_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
